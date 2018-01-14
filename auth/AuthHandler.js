@@ -37,10 +37,10 @@ module.exports.register = (event, context, callback) => {
           statusCode: 200,
           body: JSON.stringify(session)
         }))
-        .catch(err => callback(null, {
+        .catch(err => callback(err.stack, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
-          body: { stack: err.stack, message: err.message }
+          body: err.message
         }));
 
     });
@@ -51,7 +51,7 @@ module.exports.me = (event, context, callback) => {
   return connectToDatabase()
     .then(() => {
 
-      const userId = JSON.parse(event.requestContext.authorizer.id);
+      const userId = event.requestContext.authorizer.principalId;
       me(userId)
         .then(session => callback(null, {
           statusCode: 200,
@@ -71,7 +71,8 @@ module.exports.me = (event, context, callback) => {
  */
 
 function signToken(id) {
-  return jwt.sign({ id: id }, app.config.secret, {
+  console.log(id);
+  return jwt.sign({ id: id }, process.env.SECRET, {
     expiresIn: 86400 // expires in 24 hours
   });
 }
@@ -119,7 +120,9 @@ function register(eventBody) {
       Promise.resolve())
     .then(bcrypt.hash.bind(this, eventBody.password, 8))
     .then(hash => User.create({ name: eventBody.name, email: eventBody.email, password: hash }))
-    .then(user => ({ auth: true, token: signToken(user._id) }));
+    .then(user => {
+      return { auth: true, token: signToken(user._id) };
+    });
 }
 
 function me(userId) {
