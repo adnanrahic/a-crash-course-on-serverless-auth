@@ -1,5 +1,8 @@
 service: rest-api-jwt-auth
 
+# custom:
+#   secrets: ${file(secrets.json)}
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -10,7 +13,7 @@ provider:
 
 functions:
   verify-token:
-    handler: auth/VerifyToken
+    handler: auth/VerifyToken.auth
 
   login:
     handler: auth/AuthHandler.login
@@ -36,6 +39,14 @@ functions:
           method: get
           cors: true
           authorizer: verify-token
+
+  getUsers:
+    handler: user/UserHandler.getUsers
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
 
 plugins:
   - serverless-offline
