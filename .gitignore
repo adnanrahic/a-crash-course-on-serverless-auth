@@ -7,3 +7,4 @@ jspm_packages
 
 # Environment Variables
 variables.env
+secrets.json

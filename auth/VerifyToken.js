@@ -27,7 +27,7 @@ module.exports.auth = (event, context, callback) => {
     return callback(null, 'Unauthorized');
 
   // verifies secret and checks exp
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err)
       return callback(null, 'Unauthorized');
 

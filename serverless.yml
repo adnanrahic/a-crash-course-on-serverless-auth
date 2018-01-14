@@ -1,7 +1,7 @@
 service: rest-api-jwt-auth
 
-# custom:
-#   secrets: ${file(secrets.json)}
+custom:
+  secrets: ${file(secrets.json)}
 
 provider:
   name: aws
@@ -10,6 +10,9 @@ provider:
   timeout: 10
   stage: dev
   region: us-east-1
+  environment:
+    JWT_SECRET: ${self:custom.secrets.jwtSecret}
+    DB: ${self:custom.secrets.db}
 
 functions:
   verify-token:

@@ -1,4 +1,3 @@
-require('dotenv').config({ path: '../variables.env' });
 const connectToDatabase = require('../db');
 const User = require('./User');
 

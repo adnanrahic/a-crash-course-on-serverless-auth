@@ -1,4 +1,3 @@
-require('dotenv').config({ path: '../variables.env' });
 const connectToDatabase = require('../db');
 const User = require('../user/User');
 const jwt = require('jsonwebtoken');
@@ -71,24 +70,23 @@ module.exports.me = (event, context, callback) => {
  */
 
 function signToken(id) {
-  console.log(id);
-  return jwt.sign({ id: id }, process.env.SECRET, {
+  return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: 86400 // expires in 24 hours
   });
 }
 
 function login(eventBody) {
 
-  const _user = {};
+  let userId;
   return User.findOne({ email: eventBody.email })
     .then(user => {
       if (!user) return Promise.reject(new Error('User with that email does not exits.'));
-      _user._id = user._id;
+      userId = user._id;
       return user.password;
     })
     .then(userPassword => bcrypt.compare(eventBody.password, userPassword))
     .then(passwordIsValid => passwordIsValid
-      ? signToken(_user._id)
+      ? signToken(userId)
       : Promise.reject(new Error('The credentials do not match.')))
     .then(token => ({ auth: true, token: token }));
 
