@@ -10,11 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^4.0.0",
-    "jsonwebtoken": "^8.1.0",
-    "mongoose": "^5.0.0-rc0",
     "bcryptjs": "^2.4.3",
-    "bcryptjs-then": "^1.0.1"
+    "bcryptjs-then": "^1.0.1",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^5.0.0-rc0"
   },
   "devDependencies": {
     "serverless-offline": "^3.16.0"
