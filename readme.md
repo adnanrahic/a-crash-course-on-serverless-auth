@@ -1,4 +1,4 @@
-# A crash course on Serverless Authentication
+# A crash course on Serverless Authentication/Authorization
 A short and easy boilerplate showcasing JWT auth with Nodejs, the Serverless framework, MongoDB and AWS Lambda.
 
 - The `auth` folder has a `VerifyToken.js` file which is the base of the **authorizer** function.
