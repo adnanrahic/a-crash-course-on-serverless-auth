@@ -1,21 +1,21 @@
 {
   "name": "a-crash-course-on-serverless-auth",
   "version": "1.0.0",
-  "description": "",
   "main": "handler.js",
   "scripts": {
     "offline": "sls offline start --skipCacheInvalidation"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
+  "keywords": [],
+  "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "bcryptjs-then": "^1.0.1",
-    "jsonwebtoken": "^8.1.0",
-    "mongoose": "^5.0.0-rc0"
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.13"
   },
   "devDependencies": {
-    "serverless-offline": "^3.16.0"
+    "serverless-offline": "^3.20.1"
   }
 }
