@@ -23,8 +23,10 @@ module.exports.auth = (event, context, callback) => {
   // check header or url parameters or post parameters for token
   const token = event.authorizationToken;
 
-  if (!token)
-    return callback(null, 'Unauthorized');
+  if(event.authorizationToken.split(' ')[0] == 'bearer')
+    const token = event.authorizationToken.split(' ')[1] // for bearer token 
+  else
+    const token = event.authorizationToken
 
   // verifies secret and checks exp
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
