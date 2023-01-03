@@ -16,6 +16,6 @@
     "mongoose": "^5.7.5"
   },
   "devDependencies": {
-    "serverless-offline": "^3.20.1"
+    "serverless-offline": "^3.33.0"
   }
 }
